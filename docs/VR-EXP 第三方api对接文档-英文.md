@@ -92,6 +92,7 @@ User measurement data can be acquired through the API interface provided by Visb
 
 After successful connection, Visbody will push the scan ID and relevant information through the 3.1.3 interface ∂ configured by the customer, the customer can obtain the data after accessing the corresponding interface according to the results of measurement items, see 3.8 for the relationship between the synthesis push type and interface 
 
+<!-- 这是一张图片，ocr 内容为：visbody'sAPl Third-party B-endmanagement Background Customers platform service service ConfgureAPlconnection RetumVFSECRET Notifysuccessfulsynthesis AcquireVisbodyinterfacecredentialthroughsecre Retuminterfacecredentlal Acquirescanningdata Retumdata -->
 ![](https://cdn.nlark.com/yuque/0/2021/jpeg/21651137/1631523418195-c0f80ab8-a9d1-4992-8624-accd7f249f9b.jpeg)
 
 
@@ -106,6 +107,7 @@ After successful connection, Visbody will push the scan ID and relevant informat
 
 Replace the default serial number of the device, after scanning the code, jump to the customer's own APP or other platforms such as mini program, which requires customers to develop their own business logic for code scanning. 
 
+<!-- 这是一张图片，ocr 内容为：Third-party visbody'sAPI Background Deviceend User service service Deviceend requestsQRcode ReguestQRcode ReturnQRcode RetumQRcode ScantheQRcode Binduserinfommation Successfulblnding CloseQRcode lnitiatethesynthesis notifcation Notifysuccessfulsynthesis Acquirescanningdata lnterfacedisplay Returnscanningdata -->
 ![](https://cdn.nlark.com/yuque/0/2021/jpeg/21651137/1631523439940-828bcb72-4887-42fb-b84f-8c2dec5dbffe.jpeg)
 
 
@@ -116,7 +118,7 @@ Replace the default serial number of the device, after scanning the code, jump t
 + Configure 3.1.1, 3.1.2 and 3.1.3 interfaces through API connection settings in the Visbody management platform 
 + After scanning the QR code, Visbody 3.2.2 interface will initiate the user information binding and synthesis through the VPS 3.2.2 interface 
 
-### 3.1.1 Acquisition of the third-party interface credential :id=third-token
+### 3.1.1 Acquisition of the third-party API Credential:id=third-token
 **Interface description:**
 
 The customer should provide the address of the credentials to access third-party interfaces such as 3.1.2 and 3.1.3. 
@@ -161,7 +163,7 @@ The customer should provide the address of the credentials to access third-party
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -218,7 +220,7 @@ QR code of results after the user has completed the measurement at the device en
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -310,7 +312,7 @@ Notification requests must be responded to when received correctly, otherwise th
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -385,13 +387,13 @@ $headers[]  =Transferable languages are en-US(English) / ja-JP(Japanese) / zh-CN
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
 | code | int | Status code, refer to 3.8 for return status code  |
 | error_msg | string | Error information  |
-| token | string | Interface credential  |
+| token | string | API Credential |
 | expires_in | int | Credential valid time (s)  |
 
 
@@ -438,7 +440,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 | sex | Yes  | int | Gender 1. Male 2. Female  |
 | height | Yes  | int | Height (cm) 110-205  |
 | age | Yes  | int | note that the age range should be between 10 and 99  |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | name | yes | string | What about users |
 
 
@@ -462,7 +464,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -501,11 +503,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 ```plain
   {
@@ -523,14 +525,28 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 		  "SM": {"l":10,"m":15,"h":20,"v":30.3,"status":3},
 		  "TM": {"l":10,"m":15,"h":20,"v":30.3,"status":3},
 		  "PROTEIN": {"l":10,"m":15,"h":20,"v":30.3,"status":3}，
+            "METABOLICAGE": {
+            "l": 0,
+            "m": 0,
+            "h": 0,
+            "v": 22,
+            "status": 0
+        },
+            "ECWRATIO": {
+            "l": 0.2,
+            "m": 0.2,
+            "h": 0.2,
+            "v": 0.2,
+            "status": 2
+        }
     }
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
-| :--- | :--- | :--- |
+| :--- | :--- | --- |
 | WT | object | Weight (kg)  |
 | FFM | object | Fat free weight (kg)  |
 | BFM | object | Body fat mass (kg)  |
@@ -543,17 +559,19 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 | SM | object | Skeletal muscle mass (kg)  |
 | TM | object | Inorganic salt (kg)  |
 | PROTEIN | object | Protein (kg)  |
+| METABOLICAGE | object | METABOLICAGE |
+| ECWRATIO | object | ecwratio |
 
 
 **Description of body composition range**
 
 ```plain
 {
-	"l":10,        // Lower-limit value 
+	"l":10,        // Lower limit 
 	"m":15,        // Standard value 
-	"h":20,        // Upper-limit value 
+	"h":20,        // Upper limit 
 	"v":30.3,      // Measured value 
-	"status":3     // Status: 1 for low, 2 for normal, 3 for high 
+	"status":3     // Status: 1 for Low, 2 for Normal, 3 for High 
 }
 ```
 
@@ -576,12 +594,12 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | --- | --- | --- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 | type | No | string | Device type:  1 is S30 data type |
 
 
-**Return example**
+**Response Example**
 
 ```plain
   {
@@ -608,11 +626,18 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
             "v": 22,
             "status": 0
         },
+                  "ECWRATIO": {
+            "l": 0.2,
+            "m": 0.2,
+            "h": 0.2,
+            "v": 0.2,
+            "status": 2
+        }
     }
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | --- |
@@ -630,18 +655,19 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 | PROTEIN | object | Protein (kg)  |
 | ICW | object | Intracellular Water（kg） |
 | ECW | object | Extracellular Water（kg） |
-| METABOLICAGE | object | METABOLICAGE |
+| METABOLICAGE | object | Metabolic Age |
+| ECWRATIO | object | ecwratio |
 
 
 **Description of body composition range**
 
 ```plain
 {
-	"l":10,        // Lower-limit value 
+	"l":10,        // Lower limit 
 	"m":15,        // Standard value 
-	"h":20,        // Upper-limit value 
+	"h":20,        // Upper limit 
 	"v":30.3,      // Measured value 
-	"status":3     // Status: 1 for low, 2 for normal, 3 for high 
+	"status":3     // Status: 1 for Low, 2 for Normal, 3 for High 
 }
 ```
 
@@ -662,11 +688,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 <font style="color:#595959;"> </font>
 
@@ -681,7 +707,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -707,12 +733,12 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 | scan_type | Yes  | int | Scan type: 1 for anthropometry, 2 for posture  |
 
 
-**Return example**
+**Response Example**
 
 <font style="color:#595959;"> </font>
 
@@ -725,7 +751,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -749,11 +775,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 ```plain
   {
@@ -769,7 +795,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -783,10 +809,10 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 
 
-### 3.3.5 <font style="color:rgba(0, 0, 0, 0.85);">Obtain Segmental Data</font>
-**<font style="color:rgba(0, 0, 0, 0.85);">Interface Description:</font>**
+### 3.3.5 <font style="color:rgba(0, 0, 0, 0.85);">Obtaining Segmental Analysis Data</font>
+**Description:**
 
-+ **<font style="color:rgba(0, 0, 0, 0.85);">Used to obtain segmental data</font>**
++ **Used to obtain segmental analysis data.**
 
 **<font style="color:rgba(0, 0, 0, 0.85);">Request URL:</font>**
 
@@ -800,11 +826,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | **Parameter Name** | **Required** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| token | Yes | string | Interface credential |
+| token | Yes | string | API Credential |
 | scan_id | Yes | string | Scan ID |
 
 
-**<font style="color:rgba(0, 0, 0, 0.85);">Return Example:</font>**
+**Response Example**
 
 ```plain
   {
@@ -828,39 +854,39 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter Name | Type | Description |
 | --- | --- | --- |
-| BFMLA | object | Left upper limb segmental fat (kg) |
-| BFMRA | object | Right upper limb segmental fat (kg) |
-| BFMTR | object | Trunk segmental fat (kg) |
-| BFMLL | object | Left lower limb segmental fat (kg) |
-| BFMRL | object | Right lower limb segmental fat (kg) |
-| LMLA | object | Left upper limb segmental muscle (kg) |
-| LMRA | object | Right upper limb segmental muscle (kg) |
-| LMTR | object | Trunk segmental muscle (kg) |
-| LMLL | object | Left lower limb segmental muscle (kg) |
-| LMRL | object | Right lower limb segmental muscle (kg) |
+| BFMLA | object | Left Arm Fat (kg) |
+| BFMRA | object | Right Arm Fat (kg) |
+| BFMTR | object | Trunk Fat (kg) |
+| BFMLL | object | Left Leg Fat (kg) |
+| BFMRL | object | Right Leg Fat (kg) |
+| LMLA | object | Left Arm Muscle (kg) |
+| LMRA | object | Right Arm Muscle (kg) |
+| LMTR | object | Trunk Muscle (kg) |
+| LMLL | object | Left Leg Muscle (kg) |
+| LMRL | object | Right Leg Muscle (kg) |
 
 
-*Description of segment range**
+*Segmental Range Description**
 
 ```plain
   {
-"l":10, // Lower limit value
+"l":10, // Lower limit
 "m":15, // Standard value
-"h":20, // Upper limit value
+"h":20, // Upper limit
 "v":30.3, // Measured value
-"status":3 // Status: 1: Low, 2: Normal, 3: High
+"status":3 // Status: 1 for Low, 2 for Normal, 3 for High
 }
 ```
 
-**<font style="color:rgba(0, 0, 0, 0.85);">Description of Range Parameters:</font>**
+**Range Parameter Descriptions**
 
 | Parameter Name | Type | Description |
 | --- | --- | --- |
-| l | double | Lower limit value |
+| l | double | Lower limit |
 | m | double | Standard value |
-| h | double | Upper limit value |
+| h | double | Upper limit |
 | v | double | Measured value |
-| status | int | Status: 1: Low, 2: Normal, 3: High |
+| status | int | Status: 1 for Low, 2 for Normal, 3 for High |
 
 
 
@@ -883,11 +909,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 <font style="color:#595959;">  </font>
 
@@ -906,7 +932,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | --- |
@@ -937,11 +963,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 ```plain
   {
@@ -1002,7 +1028,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -1040,11 +1066,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 ```plain
   {
@@ -1058,7 +1084,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -1085,11 +1111,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 <font style="color:#595959;"> </font>
 
@@ -1115,7 +1141,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | --- | :--- | --- |
@@ -1152,11 +1178,11 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
-**Return example**
+**Response Example**
 
 ```plain
   {
@@ -1199,7 +1225,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -1233,7 +1259,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | :--- |
-| token | Yes  | string | Interface credential  |
+| token | Yes  | string | API Credential |
 | scan_id | Yes  | string | Scan ID  |
 
 
@@ -1243,7 +1269,7 @@ Language of the report
 
 $headers[]  =  "Language: $vfLanguage; // vfLanguageTransferable languages are en-US(English) / ja-JP(Japanese) / zh-CN(Chinese) 
 
-**Return example**
+**Response Example**
 
 <font style="color:#595959;"> </font>
 
@@ -1254,7 +1280,7 @@ $headers[]  =  "Language: $vfLanguage; // vfLanguageTransferable languages are e
   }
 ```
 
-**Return parameter description**
+**Response Parameter Descriptions**
 
 | Parameter name  | Type  | Description  |
 | :--- | :--- | :--- |
@@ -1343,7 +1369,7 @@ Report printing interface, the report can be accessed when at least one of the m
 
 | Parameter name  | Required  | Type  | Description  |
 | :--- | :--- | :--- | --- |
-| token | YES | string | Interface credential  |
+| token | YES | string | API Credential |
 | page | YES | string | <font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">Page Number</font> |
 | size | YES | string | <font style="color:rgb(55, 65, 81);background-color:rgb(247, 247, 248);">Page Number</font> |
 | device_id | YES | string | Device ID |

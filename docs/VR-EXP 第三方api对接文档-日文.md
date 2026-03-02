@@ -92,6 +92,7 @@ Visbodyが提供するAPI接続を通じてユーザーの測定データを取�
 
 接続成功後Visbodyは客先が割り当てる3.1.3ポート∂を介して読み取りIDなどの関連情報をプッシュし、客先は測定項目結果に基づき対応するポートにアクセスしデータを取得します。統合プッシュタイプおよびポートの関係は3.8の説明を参照ください。
 
+<!-- 这是一张图片，ocr 内容为：第三者妙-匕久 B端末管理75以 visbodyAPI 八y夕夕力沙 颜客 分八竹夕一 寸一久 卜7才一A API接统杀定 VFSECRETO夕- 统合成功通知 secret介Ltvisbody一卜解证取得 术一卜韶证小夕-> 疏孙取宁一夕取得 宁一夕小夕一> -->
 ![](https://cdn.nlark.com/yuque/0/2021/jpeg/21651137/1631523493590-45959421-85e0-42a0-ac85-df18dccf5566.jpeg)
 
 **接続説明：**
@@ -104,6 +105,7 @@ Visbodyが提供するAPI接続を通じてユーザーの測定データを取�
 
 デバイス初期設定のシリアル番号を変換し、コードを読み取った後客先自身のAPPもしくはミニアプリなどその他プラットフォームにジャンプします。
 
+<!-- 这是一张图片，ocr 内容为：第三者寸-匕久 VisbodyAPI 癫客 了八仁久 八夕分分 分八1夕一 寸一久 宁八仁QR了一下要求 QRD一下术-卜1夕工卜 QRD一FoU夕一2 QRD一下oU夕> 疏子取 工寸-情辍关连付( 纽付(OK 统合通知开始 QR7一1o夕口一文 统合通知成功 疏办取宁一夕取得 画面表示 说孙取0示一夕好夕 -->
 ![](https://cdn.nlark.com/yuque/0/2021/jpeg/21651137/1631523509769-569a5c59-7298-4e20-be77-b08d6107c018.jpeg)
 
 **接続説明：**
@@ -519,6 +521,13 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 		  "SM": {"l":10,"m":15,"h":20,"v":30.3,"status":3},
 		  "TM": {"l":10,"m":15,"h":20,"v":30.3,"status":3},
 		  "PROTEIN": {"l":10,"m":15,"h":20,"v":30.3,"status":3}，
+                "ECWRATIO": {
+            "l": 0.2,
+            "m": 0.2,
+            "h": 0.2,
+            "v": 0.2,
+            "status": 2
+        }
     }
   }
 ```
@@ -526,7 +535,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 **リターンパラメータの説明**
 
 | パラメータ名 | 類型 | 説明 |
-| :--- | :--- | :--- |
+| :--- | :--- | --- |
 | WT | object | 体重（kg） |
 | FFM | object | 除脂肪体重（kg） |
 | BFM | object | 体脂肪量(kg) |
@@ -539,6 +548,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 | SM | object | 骨格筋量(kg) |
 | TM | object | 無機塩(kg) |
 | PROTEIN | object | タンパク質(kg) |
+| ECWRATIO | object | 細胞外液比率 |
 
 
 **体組成範囲の説明**
@@ -604,6 +614,13 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
             "v": 22,
             "status": 0
         },
+                  "ECWRATIO": {
+            "l": 0.2,
+            "m": 0.2,
+            "h": 0.2,
+            "v": 0.2,
+            "status": 2
+        }
     }
   }
 ```
@@ -627,6 +644,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 | ICW | object | 細胞内液（kg） |
 | ECW | object | 細胞外液（kg） |
 | METABOLICAGE | object | 代謝年齢 |
+| ECWRATIO | object | 細胞外液比率 |
 
 
 **体組成範囲の説明**

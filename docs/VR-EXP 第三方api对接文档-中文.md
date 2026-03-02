@@ -124,7 +124,40 @@ Content-Type: application/json
 
 
 
+<!-- 这是一张图片，ocr 内容为： -->
 ![](https://cdn.nlark.com/yuque/0/2021/svg/287793/1629885727221-658ee407-fe22-4d0b-b9ab-b1e5b43cc680.svg)
+
+<!-- 这是一个文本绘图，源码为：@startuml
+
+' === 定义参与者 ===
+participant "客户" as Client
+participant "第三方服务" as ThirdPartyService
+participant "B端管理平台" as BSidePlatform
+participant "后台" as Backend
+participant "维塑API服务" as PushAPIService
+
+' === 消息流程 ===
+Client -> BSidePlatform: 配置API对接
+activate BSidePlatform
+BSidePlatform -> Client: 返回VF-SECRET
+deactivate BSidePlatform
+
+Backend -> ThirdPartyService: 合成成功通知
+activate ThirdPartyService
+
+ThirdPartyService -> PushAPIService: 通过secret获取雄塑接口凭证
+activate PushAPIService
+PushAPIService -> ThirdPartyService: 返回接口凭证
+deactivate PushAPIService
+
+ThirdPartyService -> PushAPIService: 获取扫码数据
+activate PushAPIService
+PushAPIService -> ThirdPartyService: 返回数据
+deactivate PushAPIService
+deactivate ThirdPartyService
+
+@enduml -->
+![](https://cdn.nlark.com/yuque/__puml/f6dbf073a5f1e433b7615b3cb83a505e.svg)
 
 
 
@@ -144,7 +177,35 @@ Content-Type: application/json
 
 
 
+<!-- 这是一张图片，ocr 内容为： -->
 ![](https://cdn.nlark.com/yuque/0/2021/svg/287793/1629885747063-2cc48748-a11f-404c-8539-0f9c4cffbd53.svg)
+
+<!-- 这是一个文本绘图，源码为：@startuml
+'设置参与者的顺序
+participant user as 用户
+participant third as 第三方服务
+participant 设备端 as 设备端
+participant 后台 as 后台
+participant "api-service" as 维塑API服务
+
+设备端 --> 后台: 设备端请求二维码
+后台 --> 第三方服务: 请求二维码接口
+第三方服务 -> 后台: 返回二维码
+后台 -> 设备端: 返回二维码
+用户 -> 第三方服务: 扫码
+
+第三方服务 -> 维塑API服务: 用户信息绑定
+维塑API服务 --> 第三方服务: 绑定成功
+维塑API服务 -> 后台: 发起合成通知
+后台 -> 设备端: 关闭二维码
+后台 -> 第三方服务: 合成成功通知
+
+第三方服务 -> 维塑API服务: 获取扫描数据
+维塑API服务 --> 第三方服务: 返回扫描数据
+第三方服务 -> 用户: 界面展示
+
+@enduml -->
+![](https://cdn.nlark.com/yuque/__puml/0ca01829beb4c22dfc0ea9182976ba68.svg)
 
 
 
@@ -732,6 +793,13 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
             "v": 22,
             "status": 0
         },
+      "ECWRATIO": {
+            "l": 0.2,
+            "m": 0.2,
+            "h": 0.2,
+            "v": 0.2,
+            "status": 2
+        }
     }
   }
 ```
@@ -755,6 +823,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 | TM | object | 无机盐（kg/pound） |
 | PROTEIN | object | 蛋白质（kg/pound） |
 | METABOLICAGE | object | 代谢年龄 |
+| ECWRATIO | object | 细胞外液比率 |
 
 
 
@@ -840,6 +909,13 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
             "v": 22,
             "status": 0
         },
+          "ECWRATIO": {
+            "l": 0.2,
+            "m": 0.2,
+            "h": 0.2,
+            "v": 0.2,
+            "status": 2
+        }
     }
   }
 ```
@@ -865,6 +941,7 @@ $headers[]  =  "Authorization: Bearer ". $vfToken;
 | ICW | object | 细胞内液（kg） |
 | ECW | object | 细胞外液（kg） |
 | METABOLICAGE | object | 代谢年龄 |
+| ECWRATIO | object | 细胞外液比率 |
 
 
 
